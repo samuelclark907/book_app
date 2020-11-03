@@ -1,6 +1,6 @@
 'use strict';
 
-// Environment 
+// Environment
 
 
 // Application dependencies
@@ -36,6 +36,7 @@ app.get('/', (request, response) => {
 // });
 
 
-app.listen(PORT, () => {
-  console.log(`Now listening on port ${PORT}`);
-});
+
+
+// Start our server
+app.listen(PORT, () => console.log(`Now listening on port ${PORT}.`));
