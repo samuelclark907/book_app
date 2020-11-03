@@ -8,12 +8,25 @@
 </head>
 <body>
   <h2>Hello World</h2>
+
+  <form action="/public" method="post">
+    <fieldset>
+      <legend>Contact Me</legend>
+      <label>
+        <span>First Name:</span>
+        <input type="text" name="first-name">
+      </label>
+
+      <label>
+        <span>Last Name:</span>
+        <input type="text" name="last-name">
+      </label>
   <p>Pet names:</p>
   <ul>
-    <% pets.forEach(pet => { %>
-      <li> <%= pet %> </li>
-    <% }) %>
+    
+      <li> ollie </li>
+    
   </ul>
-  <h2><%= name %></h2>
+  <h2></h2>
 </body>
 </html>
