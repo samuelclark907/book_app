@@ -1,6 +1,6 @@
 'use strict';
 
-// Environment 
+// Environment
 
 
 // Application dependencies
@@ -38,21 +38,28 @@ app.get('/searches/new', (request, response) => {
 
 app.post('/searches', (request, response) => {
   const search = request.body.search;
-  console.log(search);
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${search}`;
+  const searchField = request.body.searchField;
+  let useField = '';
+  if (searchField === 'title') {
+    useField = `intitle:${search}`;
+  } else ( useField = `inauthor:${search}`);
+  // console.log(search);
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${useField}`;
 
 
   superagent.get(url)
     .then(data => {
+      // console.log(data.body.items.volumeInfo.imageLinks);
       let bikes = data.body.items.map(book => {
         let image = '';
-        console.log(book);
-        if (book.imageLinks.thumbnail) {
-          image = book.imageLinks.thumbnail;
-        } else { image = 'https://i.imgur.com/J5LVHEL.jpg';}
+        // console.log(book.volumInfo.imagelinks);
+        // console.log()
+        if (book.volumeInfo.imageLinks) {
+          image = book.volumeInfo.imageLinks.thumbnail;
+        } else { image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQjim8QJc5Eup07gmPSuP2gStB8jZauU8kK0A&usqp=CAU'; }
         return new Book(book, image);
       });
-      response.status(200).render('pages/searches/show', bikes);
+      response.status(200).render('pages/searches/show', {bikes});
     });
 });
 
@@ -71,6 +78,10 @@ function Book(obj, image) {
 }
 
 
-app.listen(PORT, () => {
-  console.log(`Now listening on port ${PORT}`);
-});
+
+
+
+
+
+// Start our server
+app.listen(PORT, () => console.log(`Now listening on port ${PORT}.`));
