@@ -1,7 +1,13 @@
-<form>
+<form action = '/searches' method="POST">
   <fieldset>
     <legend>Search by Title or Author</legend>
     <label>Enter a Title or Author:<input type='text' name='search'></label>
+    <label for="title">Title
+      <input type="radio" name="searchField" value="title">
+    </label>
+    <label for="author"> Author
+      <input type="radio" name="searchField" value="author">
+    </label>
     <button>Submit</button>
 
   </fieldset>
