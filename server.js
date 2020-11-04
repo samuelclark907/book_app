@@ -31,9 +31,44 @@ app.get('/', (request, response) => {
   response.status(200).render('pages/index');
 });
 
+app.get('/searches/new', (request, response) => {
+  response.status(200).render('pages/searches/new');
+});
+
+
+app.post('/searches', (request, response) => {
+  const search = request.body.search;
+  console.log(search);
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${search}`;
+
+
+  superagent.get(url)
+    .then(data => {
+      let bikes = data.body.items.map(book => {
+        let image = '';
+        console.log(book);
+        if (book.imageLinks.thumbnail) {
+          image = book.imageLinks.thumbnail;
+        } else { image = 'https://i.imgur.com/J5LVHEL.jpg';}
+        return new Book(book, image);
+      });
+      response.status(200).render('pages/searches/show', bikes);
+    });
+});
+
+
 // app.get('/', (request, response) => {
 //   response.send('Hello Sams World');
 // });
+
+// Constructors
+
+function Book(obj, image) {
+  this.description = obj.volumeInfo.description;
+  this.title = obj.volumeInfo.title;
+  this.author = obj.volumeInfo.authors;
+  this.image = image;
+}
 
 
 
