@@ -28,7 +28,7 @@ app.set('view engine', 'ejs');
 // const pg = require('pg');
 
 app.get('/', (request, response) => {
-  response.status(200).render('pages/index');
+  response.status(200).render('pages/searches/new');
 });
 
 app.get('/searches/new', (request, response) => {
