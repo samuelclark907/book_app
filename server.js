@@ -14,9 +14,15 @@ const superagent = require('superagent');
 
 require('dotenv').config();
 
-// const { json } = require('express');
-// const client = new pg.Client(process.env.DATABASE_URL);
-// const pg = require('pg');
+const { json } = require('express');
+
+
+const pg = require('pg');
+
+const client = new pg.Client(process.env.DATABASE_URL);
+
+// .catch( err => console.error(err));
+
 // client.on('error', err => console.error(err));
 
 
@@ -32,13 +38,19 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-app.get('/error', errorHandler);
-
-// const pg = require('pg');
 
 app.get('/', (request, response) => {
   response.status(200).render('pages/searches/new');
 });
+
+client.connect()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Now listening on port ${PORT}`);
+    });
+  });
+
+app.get('/error', errorHandler);
 
 app.get('/searches/new', (request, response) => {
   response.status(200).render('pages/searches/new');
@@ -97,4 +109,6 @@ function Book(obj, image) {
 
 
 // Start our server///////////////////
-app.listen(PORT, () => console.log(`Now listening on port ${PORT}.`));
+// app.listen(PORT, () => console.log(`Now listening on port ${PORT}.`));
+
+
