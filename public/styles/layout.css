@@ -1,8 +1,35 @@
+
+/* main {
+  margin: auto;
+} */
+
+header {
+  width: 90%;
+  height: 60px;
+  margin: auto;
+  color: white;
+}
+
+
+
+section {
+  text-align: center;
+  background-color: rgb(63, 63, 65);
+  width: 90%;
+  margin: auto;
+  height: 40px;
+}
+
+
+#img {
+margin: auto;
+}
+
 div {
   text-align: center;
   padding: 5px;
+  margin: auto;
 }
-
 .books {
   width: 90%;
   text-align: center;
@@ -10,7 +37,6 @@ div {
   border: 3px groove rgb(157, 161, 164);
   border-radius: 4px;
 }
-
 .book {
   background: rgb(230, 230, 230);
   border: 3px groove rgb(157, 161, 164);
@@ -18,7 +44,6 @@ div {
   display: grid;
   height: 100%;
 }
-
 .title {
   font-size: 1em;
   padding: 5px;
@@ -31,16 +56,22 @@ div {
 .description {
   font-size: .6em;
   max-height: 150px;
-  overflow-y: auto;  
+  overflow-y: auto;
 }
 
-@media screen and (min-width: 880px) {
+@media screen and (min-width: 550px) {
+ 
+  /* div {
+    margin: auto;
+  } */
   .books {
     width: 95%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
   .book {
+    margin: auto;
+    align-content: center;
     padding: 2px;
   }
   .title {
