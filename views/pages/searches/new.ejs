@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/reset.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" type="text/css" href="/styles/reset.css">
+  <link rel="stylesheet" type="text/css" href="/styles/base.css">
+  <link rel="stylesheet" type="text/css" href="/styles/layout.css">
+  <link rel="stylesheet" type="text/css"href="/styles/modules.css">
   <title>new.ejs </title>
 </head>
-<body>
-  
-<form action = '/searches' method="POST">
-  <fieldset>
-    <legend>Search by Title or Author</legend>
-    <label>Enter a Title or Author:<input type='text' name='search'></label>
-    <label for="title">Title
-      <input type="radio" name="searchField" value="title">
-    </label>
-    <label for="author"> Author
-      <input type="radio" name="searchField" value="author">
-    </label>
-    <button>Submit</button>
 
-  </fieldset>
-</form>
+<body>
+
+  <form action='/searches' method="POST">
+    <fieldset>
+      <legend>Search by Title or Author</legend>
+      <label>Enter a Title or Author:<input type='text' name='search'></label>
+      <label for="title">Title
+        <input type="radio" name="searchField" value="title">
+      </label>
+      <label for="author"> Author
+        <input type="radio" name="searchField" value="author">
+      </label>
+      <button>Submit</button>
+
+    </fieldset>
+  </form>
 </body>
+
 </html>

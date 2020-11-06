@@ -1,29 +1,38 @@
 'use strict';
 
+// app.get('/', (request, response) => {
+//   response.send('Hello Sams World');
+// });
 // Environment
 
 
-// Application dependencies
-
+// Application dependencies///////////////////
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
+
+
 require('dotenv').config();
-const PORT = process.env.PORT || 3000;
+
 // const { json } = require('express');
 // const client = new pg.Client(process.env.DATABASE_URL);
+// const pg = require('pg');
 // client.on('error', err => console.error(err));
 
+
+// Express application///////////////////
 const app = express();
 
-//Application listen
+//Application listen///////////////////
+const PORT = process.env.PORT || 3000;
 
-
+// CORS///////////////////
 app.use(cors());
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+app.get('/error', errorHandler);
 
 // const pg = require('pg');
 
@@ -42,7 +51,7 @@ app.post('/searches', (request, response) => {
   let useField = '';
   if (searchField === 'title') {
     useField = `intitle:${search}`;
-  } else ( useField = `inauthor:${search}`);
+  } else (useField = `inauthor:${search}`);
   // console.log(search);
   const url = `https://www.googleapis.com/books/v1/volumes?q=${useField}`;
 
@@ -59,16 +68,18 @@ app.post('/searches', (request, response) => {
         } else { image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQjim8QJc5Eup07gmPSuP2gStB8jZauU8kK0A&usqp=CAU'; }
         return new Book(book, image);
       });
-      response.status(200).render('pages/searches/show', {bikes});
+      response.status(200).render('pages/searches/show', { bikes });
     });
 });
 
 
-// app.get('/', (request, response) => {
-//   response.send('Hello Sams World');
-// });
 
-// Constructors
+// Error Handler///////////////////
+function errorHandler(request, response) {
+  response.status(500).render('pages/error');
+}
+
+// Constructors///////////////////
 
 function Book(obj, image) {
   this.description = obj.volumeInfo.description;
@@ -78,10 +89,12 @@ function Book(obj, image) {
 }
 
 
+// app.get('/', (request, response) => {
+//   response.send('Hello Sams World');
+// });
 
 
 
 
-
-// Start our server
+// Start our server///////////////////
 app.listen(PORT, () => console.log(`Now listening on port ${PORT}.`));
