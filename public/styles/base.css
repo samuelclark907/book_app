@@ -3,6 +3,10 @@
   margin: auto;
 }
 body {
-  background-color: rgb(177, 204, 219);
-  color: rgb(54, 54, 54);
+  background-color: rgb(62, 63, 63);
+  color: rgb(17, 16, 16);
+}
+
+header {
+  background-color: black;
 }

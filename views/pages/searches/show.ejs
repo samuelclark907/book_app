@@ -10,11 +10,17 @@
 </head>
 
 <body>
-  <main>
+  <header>
+    <h1>Best Books</h1>
+</header>
+  <section>
+    <h3>Search Results</h3>
+  </section>
+  <main id="main">
     <div class="books">
       <% bikes.forEach( book => { %>
       <section class="book">
-        <img src="<%= book.image %>">
+        <img id="img" src="<%= book.image %>">
         <h2 class="title"><%= book.title %></h2>
         <h3 class="author"><%= book.author %></h3>
         <p class="description"><%= book.description %></p>
