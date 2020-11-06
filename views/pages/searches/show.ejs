@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>show.ejs</title>
   <link rel="stylesheet" href="/styles/reset.css">
-<link rel="stylesheet" href="/styles/base.css">
-<link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" type="text/css" href="/styles/base.css">
+  <link rel="stylesheet" type="text/css" href="/styles/layout.css">
+  <link rel="stylesheet" type="text/css" href="/styles/modules.css">
 </head>
+
 <body>
   <main>
-    <div>
+    <div class="books">
       <% bikes.forEach( book => { %>
-      <section>
+      <section class="book">
         <img src="<%= book.image %>">
-        <h3><%= book.title %></h3>
-        <h3><%= book.author %></h3>
-        <p><%= book.description %></p>
+        <h2 class="title"><%= book.title %></h2>
+        <h3 class="author"><%= book.author %></h3>
+        <p class="description"><%= book.description %></p>
       </section>
       <% }) %>
     </div>
   </main>
 
 </body>
+
 </html>
