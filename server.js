@@ -19,6 +19,8 @@ const { json } = require('express');
 
 const pg = require('pg');
 
+// create pg client
+
 const client = new pg.Client(process.env.DATABASE_URL);
 
 // .catch( err => console.error(err));
@@ -56,8 +58,11 @@ app.get('/searches/new', (request, response) => {
   response.status(200).render('pages/searches/new');
 });
 
+app.post('/searches', bookHandler);
 
-app.post('/searches', (request, response) => {
+// functions
+
+function bookHandler(request,response) {
   const search = request.body.search;
   const searchField = request.body.searchField;
   let useField = '';
@@ -82,7 +87,7 @@ app.post('/searches', (request, response) => {
       });
       response.status(200).render('pages/searches/show', { bikes });
     });
-});
+}
 
 
 

@@ -59,11 +59,12 @@ div {
   overflow-y: auto;
 }
 
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 700px) {
  
   /* div {
     margin: auto;
   } */
+  
   .books {
     width: 95%;
     display: grid;

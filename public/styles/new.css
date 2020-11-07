@@ -1,0 +1,11 @@
+body {
+  width: 100%;
+  margin: auto;
+  background-color: rgb(124, 81, 81);
+  align-content: center;
+}
+
+legend {
+  margin: auto;
+}
+
