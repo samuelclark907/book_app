@@ -10,23 +10,27 @@
   <link rel="stylesheet" type="text/css" href="/styles/base.css">
 </head>
 
-<body>
-  <main id="man">
-    <header>
-      <h1>Best Books</h1>
-      <div></div>
-      <div></div>
-      <div></div>
-    </header>
-    <form>
-      <fieldset>
-        <legend>Search by Title or Author</legend>
-        <label>Enter a Title or Author:<input type='text' name='search'></label>
-        <button>Submit</button>
+<header>
+  <a href="/">Home</a>
+  <a href="/searches/new">New Search</a>
+  
+</header>
 
-      </fieldset>
+<body>
+  <div class="books">
+    <% bikes.forEach( book => { %>
+    <section class="book">
+      <img id="img" src="<%= book.image %>">
+      <h2 class="title"><%= book.title %></h2>
+      <h3 class="author"><%= book.author %></h3>
+      <p class="description"><%= book.description %></p>
+
+      <form action="/books/<%= book.id%>" method="GET">
+      <button type="submit">Details</button>
     </form>
-  </main>
+    </section>
+    <% }) %>
+  </div>
 </body>
 
 </html>
