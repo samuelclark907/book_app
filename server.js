@@ -70,13 +70,15 @@ app.get('/searches/new', (request, response) => {
 app.post('/add', addBooks);
 
 app.post('/searches', bookHandler);
-app.get('*', (request, response) => response.status(404).send('This route not here'));
+
 
 app.get((error, request, response) => {
   return errorHandler(error, response);
 });
 
 app.get('/books/:id', detailBook);
+
+app.get('*', (request, response) => response.status(404).send('This route not here'));
 
 // functions
 
@@ -129,7 +131,7 @@ function detailBook(request, response) {
   client.query(SQL, params)
     .then(results => {
       console.log(results.rows);
-      response.status(200).render('pages/books/details');
+      response.status(200).render('pages/books/details', { bikes: results.rows }) ;
     });
 }
 
