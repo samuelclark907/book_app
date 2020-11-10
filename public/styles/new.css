@@ -5,7 +5,15 @@ body {
   align-content: center;
 }
 
-legend {
+section {
+  width: 50%;
   margin: auto;
+  align-content: center;
 }
+
+fieldset {
+  display: block;
+}
+
+
 
