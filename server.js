@@ -123,7 +123,7 @@ function addBooks(request, response) {
 }
 
 function detailBook(request, response) {
-  console.log('I');
+  // console.log('I');
   const SQL = 'SELECT * FROM books WHERE id=$1;';
   const params = [request.params.id];
   console.log(params);
@@ -151,6 +151,7 @@ function Book(obj, image) {
   this.title = obj.volumeInfo.title;
   this.author = obj.volumeInfo.authors;
   this.image = image;
+  this.isbn = obj.volumeInfo.industryIdentifiers.identifiers;
 }
 
 
