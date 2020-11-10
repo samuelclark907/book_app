@@ -138,14 +138,14 @@ function detailBook(request, response) {
     });
 }
 
-function editHandler(request, response) {
-  const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, img=$4, description=$5 WHERE id = $6';
-  const params = [request.body.author, request.body.title, request.body.isbn, request.body.image, request.body.description, request.params.id];
+// function editHandler(request, response) {
+//   const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, img=$4, description=$5 WHERE id = $6';
+//   const params = [request.body.author, request.body.title, request.body.isbn, request.body.image, request.body.description, request.params.id];
 
-  client.query(SQL, params)
-    .then(response.status(200).redirect(`/books/${request.params.id}`))
-    .catch(error => errorHandler(request, response, error));
-}
+//   client.query(SQL, params)
+//     .then(response.status(200).redirect(`/books/${request.params.id}`))
+//     .catch(error => errorHandler(request, response, error));
+// }
 
 
 
