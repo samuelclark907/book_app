@@ -1,7 +1,7 @@
 
-/* main {
+main {
   margin: auto;
-} */
+}
 
 header {
   width: 90%;
@@ -36,6 +36,7 @@ div {
   background-color: rgb(117, 124, 128);
   border: 3px groove rgb(157, 161, 164);
   border-radius: 4px;
+
 }
 .book {
   background: rgb(230, 230, 230);

@@ -16,7 +16,7 @@
     </header>
     <h1>Best Books</h1>
   <section>
-    <h3>Search Results</h3>
+    <h3>Details</h3>
   </section>
   <main id="main">
     <div class="books">
@@ -27,6 +27,11 @@
         <h3 class="author"><%= book.author %></h3>
         <p class="description"><%= book.description %></p>
         <p class="isbn"><%= book.isbn %></p>
+        <h4 id="isbn">ISBN: <%= book.isbn %></h4>
+        <button id="editButton">Update Details</button>
+        <form action="/delete/<%=book.id%>?_method=DELETE" method="post" id="deleteForm">
+          <button type="submit">Delete Book</button>
+        </form>
        
         <!-- <form action="/add" method="POST">
           <input type="hidden" name="title" value="<%= book.title %>">

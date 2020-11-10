@@ -14,7 +14,7 @@ const superagent = require('superagent');
 
 require('dotenv').config();
 
-const { json, response } = require('express');
+const { json, response, request } = require('express');
 
 
 const pg = require('pg');
@@ -71,6 +71,8 @@ app.post('/add', addBooks);
 
 app.post('/searches', bookHandler);
 
+app.put('edit/:id', editHandler);
+
 
 app.get((error, request, response) => {
   return errorHandler(error, response);
@@ -83,6 +85,7 @@ app.get('*', (request, response) => response.status(404).send('This route not he
 // functions
 
 function bookHandler(request, response) {
+  // console.log('hello world');
   const search = request.body.search;
   const searchField = request.body.searchField;
   let useField = '';
@@ -98,7 +101,7 @@ function bookHandler(request, response) {
       // console.log(data.body.items.volumeInfo.imageLinks);
       let bikes = data.body.items.map(book => {
         let image = '';
-        // console.log(book.volumInfo.imagelinks);
+        // console.log(book.volumeInfo.description);
         // console.log()
         if (book.volumeInfo.imageLinks) {
           image = book.volumeInfo.imageLinks.thumbnail;
@@ -112,9 +115,9 @@ function bookHandler(request, response) {
 
 
 function addBooks(request, response) {
-  const SQL = 'INSERT INTO books (image, title, author, description, isbn) VALUES ($1, $2, $3, $4, $5);';
+  const SQL = 'INSERT INTO books (title, description, author, image, isbn) VALUES ($1, $2, $3, $4, $5);';
   const params = [request.body.title, request.body.description, request.body.author, request.body.image, request.body.isbn];
-  // console.log('req', request.body);
+  // console.log('params', params);
   client.query(SQL, params)
     .then(results => {
       // console.log(results.rows);
@@ -126,16 +129,23 @@ function detailBook(request, response) {
   // console.log('I');
   const SQL = 'SELECT * FROM books WHERE id=$1;';
   const params = [request.params.id];
-  console.log(params);
+  // console.log(params);
 
   client.query(SQL, params)
     .then(results => {
-      console.log(results.rows);
-      response.status(200).render('pages/books/details', { bikes: results.rows }) ;
+      // console.log(results.rows);
+      response.status(200).render('pages/books/details', { bikes: results.rows });
     });
 }
 
+function editHandler(request, response) {
+  const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, img=$4, description=$5 WHERE id = $6';
+  const params = [request.body.author, request.body.title, request.body.isbn, request.body.image, request.body.description, request.params.id];
 
+  client.query(SQL, params)
+    .then(response.status(200).redirect(`/books/${request.params.id}`))
+    .catch(error => errorHandler(request, response, error));
+}
 
 
 

@@ -8,5 +8,5 @@ CREATE TABLE books (
   isbn VARCHAR(255)
 );
 
-INSERT INTO books(title, description, author, image, isbn)
-VALUES ('Thanos', 'test', 'test', 'test', 'test' );
+-- INSERT INTO books(title, description, author, image, isbn)
+-- VALUES ('Thanos', 'test', 'test', 'test', 'test' );
