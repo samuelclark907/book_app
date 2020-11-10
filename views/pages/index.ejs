@@ -26,6 +26,7 @@
       <h2 class="title"><%= book.title %></h2>
       <h3 class="author"><%= book.author %></h3>
       <p class="description"><%= book.description %></p>
+      <p class="isbn"><%= book.isbn %></p>
 
       <form action="/books/<%= book.id%>" method="GET">
       <button type="submit">Details</button>

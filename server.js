@@ -112,8 +112,8 @@ function bookHandler(request, response) {
 
 
 function addBooks(request, response) {
-  const SQL = 'INSERT INTO books (image, title, author, description) VALUES ($1, $2, $3, $4);';
-  const params = [request.body.image, request.body.title, request.body.author, request.body.description];
+  const SQL = 'INSERT INTO books (image, title, author, description, isbn) VALUES ($1, $2, $3, $4, $5);';
+  const params = [request.body.title, request.body.description, request.body.author, request.body.image, request.body.isbn];
   // console.log('req', request.body);
   client.query(SQL, params)
     .then(results => {
@@ -151,7 +151,7 @@ function Book(obj, image) {
   this.title = obj.volumeInfo.title;
   this.author = obj.volumeInfo.authors;
   this.image = image;
-  this.isbn = obj.volumeInfo.industryIdentifiers.identifiers;
+  this.isbn = obj.volumeInfo.industryIdentifiers[0].identifier;
 }
 
 
