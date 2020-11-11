@@ -93,3 +93,10 @@ div {
     border-radius: 4px;
   }
 } 
+
+#updateform input {
+  display: block;
+  width: 60%;
+}
+
+

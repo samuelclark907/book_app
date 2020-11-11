@@ -10,6 +10,8 @@
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
+const methodOverride = require('method-override');
+
 
 
 require('dotenv').config();
@@ -40,6 +42,8 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+app.use(methodOverride('_method'));
+
 
 // app.get('/', (request, response) => {
 //   response.status(200).render('pages/searches/new');
@@ -71,7 +75,9 @@ app.post('/add', addBooks);
 
 app.post('/searches', bookHandler);
 
-app.put('edit/:id', editHandler);
+app.get('/edit/:id', editHandlerGet);
+app.put('/edit/:id', editHandler);
+app.delete('/delete/:id', deleteHandler);
 
 
 app.get((error, request, response) => {
@@ -138,15 +144,32 @@ function detailBook(request, response) {
     });
 }
 
-// function editHandler(request, response) {
-//   const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, img=$4, description=$5 WHERE id = $6';
-//   const params = [request.body.author, request.body.title, request.body.isbn, request.body.image, request.body.description, request.params.id];
+function editHandlerGet(request, response) {
+  const SQL = 'SELECT * FROM books WHERE id = $1';
+  const params = [request.params.id];
 
-//   client.query(SQL, params)
-//     .then(response.status(200).redirect(`/books/${request.params.id}`))
-//     .catch(error => errorHandler(request, response, error));
-// }
+  client.query(SQL, params)
+    .then(results => response.status(200).render('pages/books/edit', { book: results.rows[0] }))
+    .catch(error => errorHandler(request, response, error));
+}
 
+function editHandler(request, response) {
+  const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, imq=$4, description=$5 WHERE id = $6';
+  const params = [request.body.author, request.body.title, request.body.isbn, request.body.img, request.body.description, request.params.id];
+  console.log(params);
+
+  client.query(SQL, params)
+    .then(response.status(200).redirect(`/books/${request.params.id}`))
+    .catch(error => errorHandler(request, response, error));
+}
+
+function deleteHandler(request, response) {
+  const SQL = 'DELETE FROM books WHERE id = $1'
+  const params = [request.params.id];
+  client.query(SQL, params)
+    .then(response.status(200).redirect('/'))
+    .catch(error => errorHandler(request, response, error));
+}
 
 
 // Error Handler///////////////////
