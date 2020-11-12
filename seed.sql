@@ -7,6 +7,3 @@ CREATE TABLE books (
   image VARCHAR(255),
   isbn VARCHAR(255)
 );
-
--- INSERT INTO books(title, description, author, image, isbn)
--- VALUES ('Thanos', 'test', 'test', 'test', 'test' );

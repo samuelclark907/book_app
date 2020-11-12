@@ -2,17 +2,12 @@
 <html>
 
 <head>
-  <title>show.ejs</title>
-  <link rel="stylesheet" href="/styles/reset.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/layout.css">
-  <link rel="stylesheet" href="/styles/modules.css">
+  <%- include('../../layout/head') %>
 </head>
 
 <body>
   <header>
-      <a href="/">Home</a>
-      <a href="/searches/new">New Search</a>  
+    <%- include('../../layout/header') %>  
     </header>
     <h1>Best Books</h1>
   <section>
@@ -27,8 +22,11 @@
         <h3 class="author"><%= book.author %></h3>
         <p class="description"><%= book.description %></p>
         <p class="isbn"><%= book.isbn %></p>
-        <h4 id="isbn">ISBN: <%= book.isbn %></h4>
-        <button id="editButton">Update Details</button>
+
+        <form action="/edit/<%=book.id%>" method="get"" >
+        <button id="editButton" type="submit">Update Details</button>
+      </form>
+
         <form action="/delete/<%=book.id%>?_method=DELETE" method="post" id="deleteForm">
           <button type="submit">Delete Book</button>
         </form>
