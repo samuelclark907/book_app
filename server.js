@@ -145,7 +145,7 @@ function detailBook(request, response) {
 }
 
 function editHandlerGet(request, response) {
-  const SQL = 'SELECT * FROM books WHERE id = $1';
+  const SQL = 'SELECT * FROM books WHERE id = $1;';
   const params = [request.params.id];
 
   client.query(SQL, params)
@@ -154,7 +154,7 @@ function editHandlerGet(request, response) {
 }
 
 function editHandler(request, response) {
-  const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, image=$4, description=$5 WHERE id = $6';
+  const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, image=$4, description=$5 WHERE id = $6;';
   const params = [request.body.author, request.body.title, request.body.isbn, request.body.img, request.body.description, request.params.id];
   // console.log(params);
 
@@ -164,7 +164,7 @@ function editHandler(request, response) {
 }
 
 function deleteHandler(request, response) {
-  const SQL = 'DELETE FROM books WHERE id = $1'
+  const SQL = 'DELETE FROM books WHERE id = $1;';
   const params = [request.params.id];
   client.query(SQL, params)
     .then(response.status(200).redirect('/'))
