@@ -154,9 +154,9 @@ function editHandlerGet(request, response) {
 }
 
 function editHandler(request, response) {
-  const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, imq=$4, description=$5 WHERE id = $6';
+  const SQL = 'UPDATE books SET author = $1, title =$2, isbn =$3, image=$4, description=$5 WHERE id = $6';
   const params = [request.body.author, request.body.title, request.body.isbn, request.body.img, request.body.description, request.params.id];
-  console.log(params);
+  // console.log(params);
 
   client.query(SQL, params)
     .then(response.status(200).redirect(`/books/${request.params.id}`))
