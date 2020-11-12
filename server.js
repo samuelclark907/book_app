@@ -71,21 +71,16 @@ client.connect()
 app.get('/searches/new', (request, response) => {
   response.status(200).render('pages/searches/new');
 });
+
 app.post('/add', addBooks);
-
 app.post('/searches', bookHandler);
-
 app.get('/edit/:id', editHandlerGet);
 app.put('/edit/:id', editHandler);
 app.delete('/delete/:id', deleteHandler);
-
-
 app.get((error, request, response) => {
   return errorHandler(error, response);
 });
-
 app.get('/books/:id', detailBook);
-
 app.get('*', (request, response) => response.status(404).send('This route not here'));
 
 // functions
