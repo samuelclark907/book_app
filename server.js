@@ -99,7 +99,7 @@ function bookHandler(request, response) {
 
   superagent.get(url)
     .then(data => {
-      // console.log(data.body.items.volumeInfo.imageLinks);
+      // console.log(data.body.items);
       let bikes = data.body.items.map(book => {
         let image = '';
         // console.log(book.volumeInfo.description);
